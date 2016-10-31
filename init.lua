@@ -172,3 +172,13 @@ function mouseHighlight()
 end
 
 hs.hotkey.bind(hyper, 'm', mouseHighlight)
+
+--Bring focus to next display/screen
+hs.hotkey.bind({"alt"}, "`", function ()
+  focusScreen(hs.window.focusedWindow():screen():next())
+end)
+
+--Bring focus to previous display/screen
+hs.hotkey.bind({"alt", "shift"}, "`", function() 
+  focusScreen(hs.window.focusedWindow():screen():previous())
+end)
