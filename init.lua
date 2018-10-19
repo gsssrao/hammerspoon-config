@@ -10,6 +10,12 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "R", function()
 end)
 hs.alert.show("Config loaded")
 
+function mouseMove()
+    local frame = hs.window.focusedWindow():frame()
+    local point = {x = frame.x + frame.w / 2, y = frame.y + frame.h / 2}
+    hs.mouse.setAbsolutePosition(point)
+end
+
 hs.hotkey.bind({"cmd", "ctrl"}, "Left", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
@@ -62,6 +68,58 @@ hs.hotkey.bind({"cmd", "ctrl"}, "Down", function()
   win:setFrame(f)
 end)
 
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Down", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y + (max.h/2)
+  f.w = max.w / 2
+  f.h = max.h / 2
+  win:setFrame(f)
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Up", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x
+  f.y = max.y 
+  f.w = max.w / 2
+  f.h = max.h / 2
+  win:setFrame(f)
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Left", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (max.w/2)
+  f.y = max.y 
+  f.w = max.w / 2
+  f.h = max.h / 2
+  win:setFrame(f)
+end)
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Right", function()
+  local win = hs.window.focusedWindow()
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  f.x = max.x + (max.w/2)
+  f.y = max.y + (max.h/2)
+  f.w = max.w / 2
+  f.h = max.h / 2
+  win:setFrame(f)
+end)
+
 hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
@@ -82,11 +140,18 @@ local hyper = {"cmd","alt","ctrl"}
 -- Windows Hints
 hs.hotkey.bind(hyper, "i", function()
     hs.hints.windowHints()
-    local win = hs.window.focusedWindow()
-    local max = win:frame()
-    local center = hs.geometry.rectMidPoint(max)
+    -- local win = hs.window.focusedWindow()
+    -- local max = win:frame()
+    -- local center = hs.geometry.rectMidPoint(max)
+    -- hs.mouse.setAbsolutePosition(center)
+end)
 
-    hs.mouse.setAbsolutePosition(center)
+hs.hotkey.bind(hyper, '/', function()
+    local screen = hs.mouse.getCurrentScreen()
+    local nextScreen = screen:next()
+    local rect = nextScreen:fullFrame()
+    local center = hs.geometry.rectMidPoint(rect)
+hs.mouse.setAbsolutePosition(center)
 end)
 
 hs.hotkey.bind(cmdalt, 'Up', function()
