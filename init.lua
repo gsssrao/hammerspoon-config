@@ -238,9 +238,19 @@ end
 
 hs.hotkey.bind(hyper, 'm', mouseHighlight)
 
+-- Launch/Focus applications
+hs.hotkey.bind(cmdalt, '[', function () hs.application.launchOrFocus("Sublime Text") end)
+hs.hotkey.bind(cmdalt, ']', function () hs.application.launchOrFocus("iTerm") end)
+hs.hotkey.bind(cmdalt, 'S', function () hs.application.launchOrFocus("Slack") end)
+hs.hotkey.bind(cmdalt, 'B', function () hs.application.launchOrFocus("Brave Browser") end)
+
+
 --Bring focus to next display/screen
-hs.hotkey.bind({"alt"}, "`", function ()
-  focusScreen(hs.window.focusedWindow():screen():next())
+hs.hotkey.bind(cmdalt, "1", function ()
+  local win = hs.window.focusedWindow()
+  local screen = win:screen()
+  win:moveToScreen(screen:next())
+  -- focusScreen(hs.window.focusedWindow():screen():next())
 end)
 
 --Bring focus to previous display/screen
